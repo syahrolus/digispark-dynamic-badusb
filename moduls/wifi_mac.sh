@@ -20,7 +20,7 @@ Password : ${PASS:-(not retrievable / requires admin)}
     done <<< "$PROFILES"
 fi
 
-echo "$OUT" | curl -s -X POST "http://$H:$P/store/wifi" \
+echo "$OUT" | curl -s -X POST "https://$H:$P/store/wifi" \
      -H "Authorization: $AU" \
      -H "Content-Type: text/plain" \
      -H "X-Target: $TH" \

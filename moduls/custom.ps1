@@ -4,4 +4,4 @@
 #   $wc.Headers.Add("Authorization", $AU)
 #   $wc.Headers.Add("Content-Type", "text/plain")
 #   $wc.Headers.Add("X-Target", $TH)
-#   $wc.UploadString("http://${H}:${P}/store/custom", $yourOutput)
+#   $wc.UploadString("https://${H}:${P}/store/custom", $yourOutput)
